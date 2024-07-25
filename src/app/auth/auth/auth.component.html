@@ -1,0 +1,75 @@
+<div class="background">
+    <div class="login-card">
+        <mat-card class="login-mat-card">
+            <mat-card-header>
+                <img class="login-logo-size" src="./assets/favicon.png">
+            </mat-card-header><br>
+            <mat-card-content class="content-align">
+                <form [formGroup]="loginFormGroup" *ngIf="loginFormGroup" class="form-align">
+                    <ng-container *ngIf="!hideSignup">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Name</mat-label>
+                            <input matInput placeholder="Enter your name" formControlName="name">
+                            <mat-icon matSuffix matTooltip="Enter your name">person</mat-icon>
+                            <mat-error
+                                *ngIf="loginFormGroup?.get('email')?.errors">{{warningMessage.invalidUserName}}</mat-error>
+                        </mat-form-field><br>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Gender</mat-label>
+                            <mat-select formControlName="dob">
+                                <ng-container *ngFor="let value of gender">
+                                    <mat-option [value]="value">{{value}}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field><br>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Address</mat-label>
+                            <input matInput placeholder="Enter your address" formControlName="address">
+                            <mat-icon matSuffix matTooltip="Enter your address">home</mat-icon>
+                            <mat-error
+                                *ngIf="loginFormGroup?.get('email')?.errors">{{warningMessage.invalidUserName}}</mat-error>
+                        </mat-form-field><br>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Date of Birth</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="dob">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field><br>
+                    </ng-container>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Enter your username" formControlName="email">
+                        <mat-icon matSuffix matTooltip="Enter your username">email</mat-icon>
+                        <mat-error
+                            *ngIf="loginFormGroup?.get('email')?.errors">{{warningMessage.invalidUserName}}</mat-error>
+                    </mat-form-field><br>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
+                            formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon matSuffix matTooltip="Enter your password">{{hide ? 'visibility_off' :
+                                'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error
+                            *ngIf="loginFormGroup?.get('password')?.errors">{{warningMessage.invalidPassword}}</mat-error>
+                    </mat-form-field>
+                </form><br>
+                <button class="button-color" mat-raised-button (click)="onNavigate()">
+                    {{hideSignup ? 'Login' : 'Signup'}}</button><br>
+                <ng-container *ngIf="hideSignup; else nonHide">
+                    <b>Don't have account click
+                        <span style="color: rgb(101, 101, 231); cursor: pointer;" (click)="onNavigate()">Signup</span>
+                    </b>
+                </ng-container>
+                <ng-template #nonHide>
+                    <b>Already have an account
+                        <span style="color: rgb(101, 101, 231); cursor: pointer;" (click)="onNavigate()">Signin</span>
+                    </b>
+                </ng-template>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
