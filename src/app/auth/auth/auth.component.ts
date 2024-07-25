@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthConstant } from '../auth.constant';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -27,12 +27,10 @@ export class AuthComponent extends AuthConstant implements OnInit {
   hideSignup: boolean = true
   /**
    * Constructor used to inject the service
-   * @param authService used to check the email and password is correct
-   * @param userService used to store the current role details
+   * @param authService used to check  user details correct
    * @param snackBar used to show the message.
-   * @param router used for navigation.
    */
-  constructor(private router: Router) {
+  constructor(private authService: AuthService) {
     super()
   }
 
@@ -75,6 +73,26 @@ export class AuthComponent extends AuthConstant implements OnInit {
   onNavigate(): void {
     this.hideSignup = !this.hideSignup;
     this.toSetFormControls()
+  }
+  /**
+   * Method used to store the signup details
+   */
+  signup() {
+    if (this.loginFormGroup.valid) {
+      this.authService.signup(this.loginFormGroup.value);
+    } else {
+
+    }
+  }
+  /**
+   * Method used to check the login details
+   */
+  login() {
+    if (this.loginFormGroup.valid) {
+      this.authService.loginCheck(this.loginFormGroup.value);
+    } else {
+
+    }
   }
 
 }
