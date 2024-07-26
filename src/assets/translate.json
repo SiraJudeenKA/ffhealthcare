@@ -1,0 +1,26 @@
+{
+    "en": {
+        "Enter your city": "Enter your city",
+        "Fahrenheit": "Fahrenheit",
+        "Celsius": "Celsius",
+        "Date": "Date",
+        "Logout": "Logout",
+        "Search": "Search"
+    },
+    "ta": {
+        "Enter your city": "உங்கள் நகரத்தை உள்ளிடவும்",
+        "Fahrenheit": "பாரன்ஹீட்",
+        "Celsius": "செல்சியஸ்",
+        "Date": "தேதி",
+        "Logout": "வெளியேறு",
+        "Search": "தேடு"
+    },
+    "tel": {
+        "Enter your city": "మీ నగరాన్ని నమోదు చేయండి",
+        "Fahrenheit": "ఫారెన్‌హీట్",
+        "Celsius": "సెల్సియస్",
+        "Date": "తేదీ",
+        "Logout": "లాగ్అవుట్",
+        "Search": "వెతకండి"
+    }
+}

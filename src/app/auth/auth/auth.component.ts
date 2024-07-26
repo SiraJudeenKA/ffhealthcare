@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthConstant } from '../auth.constant';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -29,8 +31,10 @@ export class AuthComponent extends AuthConstant implements OnInit {
    * Constructor used to inject the service
    * @param authService used to check  user details correct
    * @param snackBar used to show the message.
+   * @param router used to navigate the router
    */
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private matSnackBar: MatSnackBar,
+    private router: Router) {
     super()
   }
 
@@ -54,7 +58,7 @@ export class AuthComponent extends AuthConstant implements OnInit {
       this.loginFormGroup.addControl('dob', new UntypedFormControl(null, Validators.required));
       this.loginFormGroup.addControl('gender', new UntypedFormControl(null, Validators.required));
       this.loginFormGroup.get('password')?.addValidators([Validators.required,
-      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,20}$')])
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,20}$')]);
     } else {
       if (this.loginFormGroup?.get('name'))
         this.loginFormGroup.removeControl('name');
@@ -64,7 +68,10 @@ export class AuthComponent extends AuthConstant implements OnInit {
         this.loginFormGroup.removeControl('dob');
       if (this.loginFormGroup?.get('gender'))
         this.loginFormGroup.removeControl('gender');
+      this.loginFormGroup.get('password')?.setValidators([Validators.required])
     }
+    this.loginFormGroup.markAsUntouched();
+    this.loginFormGroup.reset();
   }
 
   /**
@@ -77,21 +84,36 @@ export class AuthComponent extends AuthConstant implements OnInit {
   /**
    * Method used to store the signup details
    */
-  signup() {
+  signup(): void {
     if (this.loginFormGroup.valid) {
-      this.authService.signup(this.loginFormGroup.value);
+      let valueCheck: boolean | string = this.authService.signup(this.loginFormGroup.value);
+      if (valueCheck) {
+        if (valueCheck === 'Email id already exists, please try with someother mail id')
+          this.matSnackBar.open(valueCheck, 'Okay');
+        else {
+          this.matSnackBar.open(this.warningMessage?.signupSuccess, 'Okay');
+          this.onNavigate();
+        }
+      } else {
+        this.matSnackBar.open(this.warningMessage?.signupFailed, 'Okay');
+      }
     } else {
-
+      this.matSnackBar.open(this.warningMessage?.allDetailsValid, 'Okay');
+      this.loginFormGroup.markAllAsTouched();
     }
   }
   /**
    * Method used to check the login details
    */
-  login() {
+  login(): void {
     if (this.loginFormGroup.valid) {
-      this.authService.loginCheck(this.loginFormGroup.value);
+      if (this.authService.loginCheck(this.loginFormGroup.value)) {
+        this.router.navigate(['/home'])
+      } else {
+        this.matSnackBar.open(this.warningMessage?.invalidLogin, 'Okay');
+      }
     } else {
-
+      this.matSnackBar.open(this.warningMessage?.validField, 'Okay');
     }
   }
 

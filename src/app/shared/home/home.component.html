@@ -1,0 +1,31 @@
+<ul class="navbar">
+    <div class="nav-align">
+        <li class="nav-list">
+            {{ selectedLanguage || 'Language' }}
+            <ul class="dropdown">
+                <li><a (click)="selectLanguage('English')">English</a></li>
+                <li><a (click)="selectLanguage('Tamil')">Tamil</a></li>
+                <li><a (click)="selectLanguage('Telugu')">Telugu</a></li>
+            </ul>
+        </li>
+        <li class="nav-list">{{'Logout' | translate:selectedLanguage}}</li>
+    </div>
+</ul><br>
+<ng-container>
+    <div class="main-div">
+        <mat-form-field appearance="outline" style="width: 65%;">
+            <input matInput placeholder="{{'Enter your city' | translate:selectedLanguage}}" [formControl]="cityName">
+            <mat-icon matSuffix matTooltip="{{'Enter your city' | translate:selectedLanguage}}">search</mat-icon>
+        </mat-form-field>&nbsp;
+        <button class="button-color" mat-raised-button (click)="getWeatherData()">{{'Search' |
+            translate:selectedLanguage}}</button>
+    </div>
+    <div class="main-div box-div">
+        <p style="font-size: xx-large; font-family: cursive;">{{weatherDetails.name}}</p>
+        <span> <img src="{{weatherDetails.icon}}" alt="sun">
+            <p>{{ 'Fahrenheit' | translate:selectedLanguage }} : {{weatherDetails.tempF}}</p>
+            <p>{{'Celsius' | translate:selectedLanguage}}: {{weatherDetails.tempC}}</p>
+            <p>{{'Date' |translate:selectedLanguage}}: {{weatherDetails.date | date:'mediumDate' }}</p>
+        </span>
+    </div>
+</ng-container>

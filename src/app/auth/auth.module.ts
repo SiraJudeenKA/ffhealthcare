@@ -5,6 +5,7 @@ import { AuthComponent } from './auth/auth.component';
 import { MaterialModule } from '../material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     AuthRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    SharedModule
   ],
 })
 export class AuthModule { }
