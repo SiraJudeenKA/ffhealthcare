@@ -113,7 +113,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       "Celsius": "Celsius",
       "Date": "Date",
       "Logout": "Logout",
-      "Search": "Search"
+      "Search": "Search",
+      "English": "English"
     };
     this.sharedService.currentUser = null;
   }

@@ -5,7 +5,8 @@
         "Celsius": "Celsius",
         "Date": "Date",
         "Logout": "Logout",
-        "Search": "Search"
+        "Search": "Search",
+        "English": "English"
     },
     "ta": {
         "Enter your city and click search to get live weather data": "நேரலை வானிலை தரவைப் பெற, உங்கள் நகரத்தை உள்ளிட்டு தேடலைக் கிளிக் செய்யவும்",
@@ -13,7 +14,8 @@
         "Celsius": "செல்சியஸ்",
         "Date": "தேதி",
         "Logout": "வெளியேறு",
-        "Search": "தேடு"
+        "Search": "தேடு",
+        "Tamil": "தமிழ்"
     },
     "tel": {
         "Enter your city and click search to get live weather data": "ప్రత్యక్ష వాతావరణ డేటాను పొందడానికి మీ నగరాన్ని నమోదు చేసి, శోధనను క్లిక్ చేయండి",
@@ -21,6 +23,7 @@
         "Celsius": "సెల్సియస్",
         "Date": "తేదీ",
         "Logout": "లాగ్అవుట్",
-        "Search": "వెతకండి"
+        "Search": "వెతకండి",
+        "Telugu": "తెలుగు"
     }
 }

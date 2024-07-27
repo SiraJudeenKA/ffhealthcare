@@ -1,7 +1,7 @@
 <ul class="navbar">
     <div class="nav-align">
         <li class="nav-list">
-            {{ selectedLanguage || 'Language' }}
+            {{ selectedLanguage | translate:selectedLanguage || 'Language' }}
             <ul class="dropdown">
                 <li><a (click)="selectLanguage('English')">English</a></li>
                 <li><a (click)="selectLanguage('Tamil')">Tamil</a></li>

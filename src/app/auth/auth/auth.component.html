@@ -42,8 +42,8 @@
                     </ng-container>
                     <mat-form-field appearance="outline">
                         <mat-label>Email</mat-label>
-                        <input matInput placeholder="Enter your username" formControlName="email">
-                        <mat-icon matSuffix matTooltip="Enter your username">email</mat-icon>
+                        <input matInput placeholder="Enter your email" formControlName="email">
+                        <mat-icon matSuffix matTooltip="Enter your email">email</mat-icon>
                         <mat-error
                             *ngIf="loginFormGroup?.get('email')?.errors">{{warningMessage.invalidEmail}}</mat-error>
                     </mat-form-field><br>

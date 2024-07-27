@@ -28,7 +28,8 @@ export class SharedService {
     "Celsius": "Celsius",
     "Date": "Date",
     "Logout": "Logout",
-    "Search": "Search"
+    "Search": "Search",
+    "English": "English"
   }
 
   /**
