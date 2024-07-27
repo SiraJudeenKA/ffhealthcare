@@ -65,6 +65,7 @@ export class AuthComponent extends AuthConstant implements OnInit {
       this.loginFormGroup.addControl('address', new UntypedFormControl(null, Validators.required));
       this.loginFormGroup.addControl('dob', new UntypedFormControl(null, Validators.required));
       this.loginFormGroup.addControl('gender', new UntypedFormControl(null, Validators.required));
+      this.loginFormGroup.addControl('mobile', new UntypedFormControl(null, [Validators.required, Validators.pattern('^\\d{10}$')]));
       this.loginFormGroup.get('password')?.addValidators([Validators.required,
       Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[~!@#$%^])[A-Za-z\\d~!@#$%^]{8,20}$')]);
     } else {
@@ -76,6 +77,8 @@ export class AuthComponent extends AuthConstant implements OnInit {
         this.loginFormGroup.removeControl('dob');
       if (this.loginFormGroup?.get('gender'))
         this.loginFormGroup.removeControl('gender');
+      if (this.loginFormGroup?.get('mobile'))
+        this.loginFormGroup.removeControl('mobile');
       this.loginFormGroup.get('password')?.setValidators([Validators.required])
     }
     this.loginFormGroup.markAsUntouched();

@@ -15,6 +15,7 @@ export class AuthConstant {
         signupFailed: 'Failed to save the user details',
         invalidLogin: 'Please check your email id or password',
         allDetailsValid: 'Please enter the valid details',
-        validPassword: 'Please enter valid password'
+        validPassword: 'Please enter valid password',
+        invalidmobile: 'Please enter valid mobile number and should be 10 digit'
     }
 }

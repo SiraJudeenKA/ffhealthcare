@@ -39,6 +39,13 @@
                             <mat-error
                                 *ngIf="loginFormGroup?.get('dob')?.errors">{{warningMessage.invalidDob}}</mat-error>
                         </mat-form-field><br>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Mobile Number</mat-label>
+                            <input matInput placeholder="Enter your mobile number" formControlName="mobile">
+                            <mat-icon matSuffix matTooltip="Enter your mobile number">phone</mat-icon>
+                            <mat-error
+                                *ngIf="loginFormGroup?.get('mobile')?.errors">{{warningMessage.invalidmobile}}</mat-error>
+                        </mat-form-field><br>
                     </ng-container>
                     <mat-form-field appearance="outline">
                         <mat-label>Email</mat-label>
