@@ -33,7 +33,7 @@
                         </mat-form-field><br>
                         <mat-form-field appearance="outline">
                             <mat-label>Date of Birth</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="dob">
+                            <input matInput [matDatepicker]="picker" [max]="today" formControlName="dob">
                             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                             <mat-error
@@ -63,12 +63,12 @@
                 <button class="button-color" mat-raised-button (click)="hideSignup ? login() : signup()">
                     {{hideSignup ? 'Login' : 'Signup'}}</button><br>
                 <ng-container *ngIf="hideSignup; else nonHide">
-                    <b>Don't have account click
+                    <b>Don't have account click?
                         <span style="color: rgb(101, 101, 231); cursor: pointer;" (click)="onNavigate()">Signup</span>
                     </b>
                 </ng-container>
                 <ng-template #nonHide>
-                    <b>Already have an account
+                    <b>Already have an account?
                         <span style="color: rgb(101, 101, 231); cursor: pointer;" (click)="onNavigate()">Signin</span>
                     </b>
                 </ng-template>

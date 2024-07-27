@@ -1,6 +1,6 @@
 {
     "en": {
-        "Enter your city": "Enter your city",
+        "Enter your city and click search to get live weather data": "Enter your city and click search to get live weather data",
         "Fahrenheit": "Fahrenheit",
         "Celsius": "Celsius",
         "Date": "Date",
@@ -8,7 +8,7 @@
         "Search": "Search"
     },
     "ta": {
-        "Enter your city": "உங்கள் நகரத்தை உள்ளிடவும்",
+        "Enter your city and click search to get live weather data": "நேரலை வானிலை தரவைப் பெற, உங்கள் நகரத்தை உள்ளிட்டு தேடலைக் கிளிக் செய்யவும்",
         "Fahrenheit": "பாரன்ஹீட்",
         "Celsius": "செல்சியஸ்",
         "Date": "தேதி",
@@ -16,7 +16,7 @@
         "Search": "தேடு"
     },
     "tel": {
-        "Enter your city": "మీ నగరాన్ని నమోదు చేయండి",
+        "Enter your city and click search to get live weather data": "ప్రత్యక్ష వాతావరణ డేటాను పొందడానికి మీ నగరాన్ని నమోదు చేసి, శోధనను క్లిక్ చేయండి",
         "Fahrenheit": "ఫారెన్‌హీట్",
         "Celsius": "సెల్సియస్",
         "Date": "తేదీ",

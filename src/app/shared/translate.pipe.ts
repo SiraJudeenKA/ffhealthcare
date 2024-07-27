@@ -14,7 +14,6 @@ export class TranslatePipe implements PipeTransform {
   constructor(private sharedService: SharedService) { }
 
   transform(value: string, suffix: string): string {
-    console.log(value, suffix, this.sharedService.currentLanguageDetails[value]);
     return this.sharedService.currentLanguageDetails[value];
   }
 

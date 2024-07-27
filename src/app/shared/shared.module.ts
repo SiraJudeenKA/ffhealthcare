@@ -5,8 +5,6 @@ import { MaterialModule } from '../material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from './translate.pipe';
 
-
-
 @NgModule({
   declarations: [
     HomeComponent,

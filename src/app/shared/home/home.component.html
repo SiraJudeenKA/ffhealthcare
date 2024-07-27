@@ -8,17 +8,18 @@
                 <li><a (click)="selectLanguage('Telugu')">Telugu</a></li>
             </ul>
         </li>
-        <li class="nav-list">{{'Logout' | translate:selectedLanguage}}</li>
+        <li class="nav-list" (click)="onLogout()">{{'Logout' | translate:selectedLanguage}}</li>
     </div>
 </ul><br>
 <ng-container>
     <div class="main-div">
         <mat-form-field appearance="outline" style="width: 65%;">
-            <input matInput placeholder="{{'Enter your city' | translate:selectedLanguage}}" [formControl]="cityName">
-            <mat-icon matSuffix matTooltip="{{'Enter your city' | translate:selectedLanguage}}">search</mat-icon>
+            <input matInput (keyup.enter)="getWeatherData()"
+                placeholder="{{'Enter your city and click search to get live weather data' | translate:selectedLanguage}}"
+                [formControl]="cityName">
+            <button class="button-color" mat-raised-button (click)="getWeatherData()" matSuffix>{{'Search' |
+                translate:selectedLanguage}}</button>
         </mat-form-field>&nbsp;
-        <button class="button-color" mat-raised-button (click)="getWeatherData()">{{'Search' |
-            translate:selectedLanguage}}</button>
     </div>
     <div class="main-div box-div">
         <p style="font-size: xx-large; font-family: cursive;">{{weatherDetails.name}}</p>

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { loginDetails, userDetails } from './user.model';
+import { loginDetails, userDetails } from './auth-constant/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
 
   constructor() { }
   /**
@@ -35,7 +36,6 @@ export class AuthService {
         this.userDetails.push(details);
         sessionStorage.setItem('userDetails', JSON.stringify(this.userDetails));
       }
-
       return true;
     } catch (err) {
       return false;

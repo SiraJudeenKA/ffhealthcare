@@ -5,7 +5,7 @@ export class AuthConstant {
     warningMessage = {
         validField: 'Please enter valid username or password',
         incorrectField: 'Email or password is incorrect',
-        invalidPassword: 'Password must be 8-20 characters long, contain at least one uppercase letter, one lowercase letter, and one special character',
+        invalidPassword: 'Password must be 8-20 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one symbol from ~!@#$%^',
         invalidEmail: 'Please enter the valid email id',
         invalidName: 'Please enter valid name',
         invalidAddress: 'Please enter valid address',

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthConstant } from '../auth.constant';
+import { AuthConstant } from '../auth-constant/auth.constant';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/shared/shared.service';
 
 @Component({
   selector: 'app-auth',
@@ -26,14 +27,20 @@ export class AuthComponent extends AuthConstant implements OnInit {
   /**
    * Variable used to hide the signup form details
    */
-  hideSignup: boolean = true
+  hideSignup: boolean = true;
+  /**
+   * Variable used to save the new date.
+   */
+  today = new Date();
   /**
    * Constructor used to inject the service
    * @param authService used to check  user details correct
    * @param snackBar used to show the message.
    * @param router used to navigate the router
+   * @param sharedService used to access the method of shared service.
    */
-  constructor(private authService: AuthService, private matSnackBar: MatSnackBar,
+  constructor(private authService: AuthService, private sharedService: SharedService,
+    private matSnackBar: MatSnackBar,
     private router: Router) {
     super()
   }
@@ -58,7 +65,7 @@ export class AuthComponent extends AuthConstant implements OnInit {
       this.loginFormGroup.addControl('dob', new UntypedFormControl(null, Validators.required));
       this.loginFormGroup.addControl('gender', new UntypedFormControl(null, Validators.required));
       this.loginFormGroup.get('password')?.addValidators([Validators.required,
-      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,20}$')]);
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[~!@#$%^])[A-Za-z\\d~!@#$%^]{8,20}$')]);
     } else {
       if (this.loginFormGroup?.get('name'))
         this.loginFormGroup.removeControl('name');
@@ -108,7 +115,8 @@ export class AuthComponent extends AuthConstant implements OnInit {
   login(): void {
     if (this.loginFormGroup.valid) {
       if (this.authService.loginCheck(this.loginFormGroup.value)) {
-        this.router.navigate(['/home'])
+        this.sharedService.currentUser = JSON.stringify(this.loginFormGroup.value);
+        this.router.navigate(['/home']);
       } else {
         this.matSnackBar.open(this.warningMessage?.invalidLogin, 'Okay');
       }

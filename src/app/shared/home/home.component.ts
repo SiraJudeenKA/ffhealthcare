@@ -3,7 +3,10 @@ import { SharedService } from '../shared.service';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-
+import { Router } from '@angular/router';
+/**
+ * Interface for the weather details to display in UI.
+ */
 interface weatherDetails {
   name: string;
   icon: string;
@@ -27,7 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   cityName: FormControl = new FormControl(null);
 
   weatherDetails: weatherDetails = {
-    name: 'Static locaion',
+    name: 'India',
     icon: '//cdn.weatherapi.com/weather/64x64/day/266.png',
     tempC: '20',
     tempF: '30',
@@ -39,9 +42,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   subscriptionObject: Subscription = new Subscription();
   /**
    * Used to inject your service to make the api call
-   * @param sharedService 
+   * @param sharedService has access the shared service
+   * @param matSnackBar has the snack bar data
+   * @param router has the router to navigate.
    */
-  constructor(private sharedService: SharedService, private matSnackBar: MatSnackBar,) { }
+  constructor(private sharedService: SharedService,
+    private matSnackBar: MatSnackBar, private router: Router) { }
 
   /**
    * Oninit life cycle hook
@@ -90,9 +96,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.selectedLanguage = language;
     this.setLanguageDetailsValue(language === 'English' ? 'en' : language === 'Tamil' ? 'ta' : 'tel')
   }
-
+  /**
+   * Method used to logout and navigate signin
+   */
+  onLogout(): void {
+    this.router.navigate(['']);
+  }
+  /**
+   * On destoy life cycle
+   */
   ngOnDestroy(): void {
     this.subscriptionObject.unsubscribe();
+    this.sharedService.currentLanguageDetails = {
+      "Enter your city and click search to get live weather data": "Enter your city and click search to get live weather data",
+      "Fahrenheit": "Fahrenheit",
+      "Celsius": "Celsius",
+      "Date": "Date",
+      "Logout": "Logout",
+      "Search": "Search"
+    };
+    this.sharedService.currentUser = null;
   }
 
 }

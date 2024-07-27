@@ -11,10 +11,19 @@ export class SharedService {
    * Variable used to store the private key;
    */
   privateKey: string = 'fd01d47dd72e4f0e92195513242507'
-
+  /**
+   * Variable used to check the currently login user;
+   */
+  currentUser: string | null = null;
+  /**
+   * Maintain the language details
+   */
   languageDetails!: any;
+  /**
+   * Object used to store the current language details.
+   */
   currentLanguageDetails: any = {
-    "Enter your city": "Enter your city",
+    "Enter your city and click search to get live weather data": "Enter your city and click search to get live weather data",
     "Fahrenheit": "Fahrenheit",
     "Celsius": "Celsius",
     "Date": "Date",
