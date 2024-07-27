@@ -29,7 +29,8 @@ export class SharedService {
     "Date": "Date",
     "Logout": "Logout",
     "Search": "Search",
-    "English": "English"
+    "English": "English",
+    "Welcome": "Welcome"
   }
 
   /**
@@ -50,7 +51,7 @@ export class SharedService {
    * @param cityName has the city name
    * @returns 
    */
-  getWeatherData(cityName: string): Observable<any> {
-    return this.http.get(`http://api.weatherapi.com/v1/current.json?key=${this.privateKey}&q=${cityName}`)
+  getWeatherData(cityName: string, languageCode: string = 'en'): Observable<any> {
+    return this.http.get(`http://api.weatherapi.com/v1/current.json?key=${this.privateKey}&q=${cityName}&lang=${languageCode}`)
   }
 }

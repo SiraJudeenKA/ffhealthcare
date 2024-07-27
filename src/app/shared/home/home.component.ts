@@ -13,6 +13,7 @@ interface weatherDetails {
   tempC: string;
   tempF: string
   date: string
+  text: string
 }
 @Component({
   selector: 'app-home',
@@ -28,14 +29,25 @@ export class HomeComponent implements OnInit, OnDestroy {
    * form control for the city name.
    */
   cityName: FormControl = new FormControl(null);
-
+  /**
+   * currently login user name
+   */
+  userName: string = ''
+  /**
+   * Default value for weather details
+   */
   weatherDetails: weatherDetails = {
     name: 'India',
     icon: '//cdn.weatherapi.com/weather/64x64/day/266.png',
     tempC: '20',
     tempF: '30',
-    date: '2024-07-26 18:15'
+    date: '2024-07-26 18:15',
+    text: 'Cloudy'
   };
+  /**
+   * Variable has the language code
+   */
+  langCode: string = 'en'
   /**
    * Variable used to subscription object.
    */
@@ -53,6 +65,8 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Oninit life cycle hook
    */
   ngOnInit() {
+    let details = this.sharedService.currentUser ? JSON.parse(this.sharedService.currentUser) : { name: 'Fore Front' };
+    this.userName = details?.name;
     this.subscriptionObject.add(this.sharedService.getlanguageDetails().subscribe({
       next: (res) => {
         this.sharedService.languageDetails = res;
@@ -74,13 +88,14 @@ export class HomeComponent implements OnInit, OnDestroy {
    */
   getWeatherData(): void {
     if (this.cityName.value) {
-      this.subscriptionObject.add(this.sharedService.getWeatherData(this.cityName.value).subscribe({
+      this.subscriptionObject.add(this.sharedService.getWeatherData(this.cityName.value, this.langCode).subscribe({
         next: (res: any) => {
           this.weatherDetails.name = res?.location?.name;
           this.weatherDetails.icon = res?.current?.condition?.icon;
           this.weatherDetails.tempC = res?.current?.temp_c;
           this.weatherDetails.tempF = res?.current?.temp_f
-          this.weatherDetails.date = res?.location?.localtime
+          this.weatherDetails.date = res?.location?.localtime;
+          this.weatherDetails.text = res?.current?.condition?.text;
         },
         error: (e) => {
           this.matSnackBar.open(e?.error?.error?.message, 'Okay');
@@ -93,8 +108,10 @@ export class HomeComponent implements OnInit, OnDestroy {
    * @param language has the language
    */
   selectLanguage(language: string): void {
+    this.langCode = language === 'English' ? 'en' : language === 'Tamil' ? 'ta' : 'te'
     this.selectedLanguage = language;
-    this.setLanguageDetailsValue(language === 'English' ? 'en' : language === 'Tamil' ? 'ta' : 'tel')
+    this.setLanguageDetailsValue(this.langCode);
+    this.getWeatherData()
   }
   /**
    * Method used to logout and navigate signin
@@ -114,7 +131,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       "Date": "Date",
       "Logout": "Logout",
       "Search": "Search",
-      "English": "English"
+      "English": "English",
+      "Welcome": "Welcome"
     };
     this.sharedService.currentUser = null;
   }

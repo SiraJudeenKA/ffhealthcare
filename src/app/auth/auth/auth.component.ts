@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthConstant } from '../auth-constant/auth.constant';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared/shared.service';
+import { userDetails } from '../auth-constant/user.model';
+import { AuthConstant } from '../auth-constant/auth.constant';
 
 @Component({
   selector: 'app-auth',
@@ -115,13 +116,17 @@ export class AuthComponent extends AuthConstant implements OnInit {
   login(): void {
     if (this.loginFormGroup.valid) {
       if (this.authService.loginCheck(this.loginFormGroup.value)) {
-        this.sharedService.currentUser = JSON.stringify(this.loginFormGroup.value);
-        this.router.navigate(['/home']);
+        if (this.authService.userDetails?.length > 0) {
+          const details = this.authService.userDetails?.find((res: userDetails) => res.email === this.loginFormGroup?.value?.email);
+          this.sharedService.currentUser = JSON.stringify(details);
+          this.router.navigate(['/home']);
+        }
       } else {
         this.matSnackBar.open(this.warningMessage?.invalidLogin, 'Okay');
       }
     } else {
       this.matSnackBar.open(this.warningMessage?.validField, 'Okay');
+      this.loginFormGroup.markAllAsTouched();
     }
   }
 

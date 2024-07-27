@@ -1,5 +1,8 @@
 <ul class="navbar">
-    <div class="nav-align">
+    <div style="padding-left: 20px; color: white;">
+        <p>{{'Welcome' | translate:selectedLanguage}}, {{userName}}</p>
+    </div>
+    <div style="position: absolute;right: 25px;">
         <li class="nav-list">
             {{ selectedLanguage | translate:selectedLanguage || 'Language' }}
             <ul class="dropdown">
@@ -10,6 +13,7 @@
         </li>
         <li class="nav-list" (click)="onLogout()">{{'Logout' | translate:selectedLanguage}}</li>
     </div>
+    <!-- </div> -->
 </ul><br>
 <ng-container>
     <div class="main-div">
@@ -22,8 +26,9 @@
         </mat-form-field>&nbsp;
     </div>
     <div class="main-div box-div">
-        <p style="font-size: xx-large; font-family: cursive;">{{weatherDetails.name}}</p>
+        <p style="font-size: xx-large">{{weatherDetails.name}}</p>
         <span> <img src="{{weatherDetails.icon}}" alt="sun">
+            <p>{{weatherDetails.text}}</p>
             <p>{{ 'Fahrenheit' | translate:selectedLanguage }} : {{weatherDetails.tempF}}</p>
             <p>{{'Celsius' | translate:selectedLanguage}}: {{weatherDetails.tempC}}</p>
             <p>{{'Date' |translate:selectedLanguage}}: {{weatherDetails.date | date:'mediumDate' }}</p>
