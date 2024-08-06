@@ -3,7 +3,7 @@ import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms
 import { AuthService } from '../auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { SharedService } from 'src/app/shared/shared.service';
+import { SharedService } from '@shared/shared.service';
 import { userDetails } from '../auth-constant/user.model';
 import { AuthConstant } from '../auth-constant/auth.constant';
 
